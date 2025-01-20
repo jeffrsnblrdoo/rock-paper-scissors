@@ -1,6 +1,7 @@
 let humanScore = 0;
 let computerScore = 0;
-let round = 0;
+let rounds = 5;
+let humanChoice = "";
 
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * 3 + 1);
@@ -14,15 +15,26 @@ function getComputerChoice() {
     }
 }
 
-const getPlayerChoice = (e) => {
-    humanChoice = e.target.textContent;
-    playRound(humanChoice, getComputerChoice());
-};
+const result = document.querySelector("#result");
 
 const buttons = document.querySelectorAll("button");
-buttons.forEach((button) => button.addEventListener("click", getPlayerChoice));
+buttons.forEach((button) =>
+    button.addEventListener("click", (e) => {
+        humanChoice = e.target.textContent;
 
-const result = document.querySelector("#result");
+        if (rounds != 0) {
+            playRound(humanChoice, getComputerChoice());
+            rounds--;
+            console.log(rounds);
+        } else {
+            if (computerScore > humanScore) {
+                result.textContent = `You lose! Computer score is ${computerScore} and your score is ${humanScore}!`;
+            } else if (computerScore < humanScore) {
+                result.textContent = `You win! Your score is ${humanScore} and computer score is ${computerScore}!`;
+            }
+        }
+    })
+);
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === "rock" && computerChoice === "paper") {
