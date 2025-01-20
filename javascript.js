@@ -24,13 +24,15 @@ buttons.forEach((button) =>
 
         if (rounds != 0) {
             playRound(humanChoice, getComputerChoice());
-            rounds--;
             console.log(rounds);
+            rounds--;
         } else {
             if (computerScore > humanScore) {
                 result.textContent = `You lose! Computer score is ${computerScore} and your score is ${humanScore}!`;
             } else if (computerScore < humanScore) {
                 result.textContent = `You win! Your score is ${humanScore} and computer score is ${computerScore}!`;
+            } else {
+                result.textContent = `Draw! Your score is ${humanScore} and computer score is ${computerScore}!`;
             }
         }
     })
